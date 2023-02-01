@@ -1,0 +1,9 @@
+.addStudent-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.addStudent-container{
+    margin: 0px 10px;
+}

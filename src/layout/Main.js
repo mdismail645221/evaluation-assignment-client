@@ -12,7 +12,7 @@ const Main = () => {
             <div>
                 <Navber></Navber>
             </div>
-            <div>
+            <div className='Outlet-container'>
                 <Outlet></Outlet>
             </div>
         </Container>
