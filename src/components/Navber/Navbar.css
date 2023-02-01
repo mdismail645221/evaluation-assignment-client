@@ -1,0 +1,10 @@
+.navbar-container{
+    /* background-color: red; */
+    height: 100vh;
+    overflow: visible;
+    padding: 10px;
+}
+
+.navbar-container ul li{
+    list-style: none;
+}
