@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import AddStudent from "../components/AddStudent/AddStudent";
 import Main from "../layout/Main";
 
 
@@ -9,8 +10,8 @@ export const router = createBrowserRouter([
         errorElement: <div>NOT FOUND</div>,
         children: [
             {
-                path: '/',
-                element: []
+                path: '/addStudent',
+                element: <AddStudent></AddStudent>
             }
         ]
     }

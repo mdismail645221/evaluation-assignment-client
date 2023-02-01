@@ -12,7 +12,7 @@ const Navber = () => {
             </div>
             <nav>
                 <ul>
-                    <li><Link to="/">Add Student</Link></li>
+                    <li><Link to="/addStudent">Add Student</Link></li>
                     <li><Link to="/">Manage Students</Link></li>
                     <li><Link to="/">Login</Link></li>
                     <li><Link to="/">Logout</Link></li>
