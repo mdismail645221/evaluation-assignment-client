@@ -6,8 +6,3 @@ export const AddStudentSelector = styled('select')(({ theme }) => ({
     // boxSizing: 'content-box'
 }))
 
-
-export const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    color: '#ffffff',
-    fontWeight: '900'
-}));

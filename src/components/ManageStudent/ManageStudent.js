@@ -1,6 +1,6 @@
 import { Box, Table, TableCell, TableContainer, TableHead, TableRow, TableBody, Paper, styled } from '@mui/material';
 import React from 'react';
-import { StyledTableCell } from '../../styled/AddStudentSelector';
+import { StyledTableCell } from '../../styled/ManageStudent';
 
 
 function createData(name, calories, fat, carbs, protein) {
