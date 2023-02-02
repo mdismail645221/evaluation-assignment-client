@@ -1,17 +1,59 @@
-import { Box, FormControl, FormHelperText, Input, MenuItem, Select } from '@mui/material';
-import React from 'react';
+import { Box, Button, FormControl, FormHelperText, Input, MenuItem, Select } from '@mui/material';
+import React, { useReducer, useState } from 'react';
+import { AddStudentSelector } from '../../styled/AddStudentSelector.js';
+// import { ADDSTUDENTSELECTOR } from '../../styled/ADDSTUDENTSELECTOR.JS';
 import '../AddStudent/AddStudent.css'
 
 
 
 
 const AddStudent = () => {
-    const [age, setAge] = React.useState('');
 
-    const handleChange = (event) => {
-        setAge(event.target.value);
-        console.log(age)
+    // const [fastName, setFastName] = useState("");
+    // const [middleName, setMiddleName] = useState("");
+    // const [classes, setClasses] = useState("");
+    // const [division, setDivision] = useState("");
+    // const [rollNumber, setRollNumber] = useState("");
+    // const [addressLineOne, setAddressLineOne] = useState("");
+    // const [addressLineTwo, setAddressLineTwo] = useState("");
+    // const [landmark, setLandmark] = useState(""); 
+    // const [city, setCity] = useState(""); 
+    // const [pincode, setPincode] = useState(""); 
+
+
+
+    const initialState = {
+        firstName: "",
+        middleName: "",
+        lastName: "",
+        classes: "",
+        division: "",
+        rollNumber: "",
+        addressLineOne: "",
+        addressLineTwo: "",
+        landmark: "",
+        city: "",
+        pincode: ""
+
     };
+
+    const reducer = (state, action) => {
+        console.log(action)
+        if (action.type === "INPUT") {
+            return {
+                ...state,
+                [action.playload.name]: action.playload.value
+            }
+        }
+    }
+
+    const [state, dispatch] = useReducer(reducer, initialState);
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(state)
+    }
+
 
     return (
         <section className='addStudent-container'>
@@ -22,7 +64,7 @@ const AddStudent = () => {
             </div>
 
             {/* add student form */}
-            <form >
+            <form onSubmit={handleSubmit}>
                 <Box sx={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -36,52 +78,82 @@ const AddStudent = () => {
                         <Input sx={{
                             width: '100%',
                             border: '1px solid #ddd',
-                            padding: '16.5px 14px',
-                        }} type="text" placeholder='FirstName' />
+                            // padding: '16.5px 14px',
+                        }}
+                            type="text"
+                            placeholder='FirstName'
+                            name="firstName"
+                            onBlur={(e) => dispatch({ type: "INPUT", playload: { name: e.target.name, value: e.target.value } })}
+                        />
                         <Input sx={{
                             width: '100%',
                             border: '1px solid #ddd',
-                            padding: '16.5px 14px',
-                        }} type="text" placeholder='Middle Name' />
+                            // padding: '16.5px 14px',
+
+                        }}
+                            type="text"
+                            placeholder='Middle Name'
+                            name="middleName"
+                            onBlur={(e) => dispatch({ type: "INPUT", playload: { name: e.target.name, value: e.target.value } })}
+                        />
                         <Input sx={{
                             width: '100%',
                             border: '1px solid #ddd',
-                            padding: '16.5px 14px',
-                        }} type="text" placeholder='LastName' />
+                            // padding: '16.5px 14px',
+                        }}
+                            type="text"
+                            placeholder='LastName'
+                            name="lastName"
+                            onBlur={(e) => dispatch({ type: "INPUT", playload: { name: e.target.name, value: e.target.value } })}
+                        />
                     </Box>
                     <Box sx={{
                         display: 'flex',
                         justifyContent: 'space-between',
                         gap: '10px'
                     }}>
-                        <FormControl sx={{
-                            width: '100%',
-                            border: '1px solid #ddd'
-                        }}>
-                            <Select
-                                // value={age}
-                                // onChange={handleChange}
-                                displayEmpty
-                                inputProps={{ 'aria-label': 'Without label' }}
-                            >
-                                <MenuItem value="">
-                                    <em>None</em>
-                                </MenuItem>
-                                <MenuItem value={10}>Ten</MenuItem>
-                                <MenuItem value={20}>Twenty</MenuItem>
-                                <MenuItem value={30}>Thirty</MenuItem>
-                            </Select>
-                        </FormControl>
 
-                        <select>
-                            <option value="ONE">ONE</option>
-                            <option value="TWO">TWO</option>
-                        </select>
+                        <AddStudentSelector 
+                            name="classes"
+                            onChange={(e) => dispatch({ type: "INPUT", playload: { name: e.target.name, value: e.target.value } })}
+                        >
+                            <option value="Select Class">Select Class</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </AddStudentSelector>
+
+                        <AddStudentSelector
+                            
+                            name="division"
+                            onChange={(e) => dispatch({ type: "INPUT", playload: { name: e.target.name, value: e.target.value } })}
+                        >
+                            <option value="Selected Division">Selected Division</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                        </AddStudentSelector>
 
                         <Input sx={{
                             width: '100%',
                             border: '1px solid #ddd'
-                        }} type="text" placeholder='Enter Roll Number in Digits' />
+                        }}
+                            type="number"
+                            placeholder='Enter Roll Number in Digits'
+                            name="rollNumber"
+                            onBlur={(e) => dispatch({ type: "INPUT", playload: { name: e.target.name, value: e.target.value } })}
+                        />
                     </Box>
                 </Box>
 
@@ -100,11 +172,21 @@ const AddStudent = () => {
                         <Input sx={{
                             width: '100%',
                             border: '1px solid #ddd'
-                        }} type="text" placeholder='Select Class' />
+                        }}
+                            type="text"
+                            placeholder='Address Line 1'
+                            name="addressLineOne"
+                            onBlur={(e) => dispatch({ type: "INPUT", playload: { name: e.target.name, value: e.target.value } })}
+                        />
                         <Input sx={{
                             width: '100%',
                             border: '1px solid #ddd'
-                        }} type="text" placeholder='Select Division' />
+                        }}
+                            type="text"
+                            placeholder='Address Line 2'
+                            name="addressLineTwo"
+                            onBlur={(e) => dispatch({ type: "INPUT", playload: { name: e.target.name, value: e.target.value } })}
+                        />
                     </Box>
                     <Box sx={{
                         display: 'flex',
@@ -114,16 +196,34 @@ const AddStudent = () => {
                         <Input sx={{
                             width: '100%',
                             border: '1px solid #ddd'
-                        }} type="text" placeholder='Select Class' />
+                        }}
+                            type="text"
+                            placeholder='Landmark'
+                            name="landmark"
+                            onBlur={(e) => dispatch({ type: "INPUT", playload: { name: e.target.name, value: e.target.value } })}
+                        />
                         <Input sx={{
                             width: '100%',
                             border: '1px solid #ddd'
-                        }} type="text" placeholder='Select Division' />
+                        }}
+                            type="text"
+                            placeholder='City'
+                            name="city"
+                            onBlur={(e) => dispatch({ type: "INPUT", playload: { name: e.target.name, value: e.target.value } })}
+                        />
                         <Input sx={{
                             width: '100%',
                             border: '1px solid #ddd'
-                        }} type="text" placeholder='Enter Roll Number in Digits' />
+                        }} 
+                        type="number"
+                         placeholder='PinCode'
+                            name="pincode"
+                            onBlur={(e) => dispatch({ type: "INPUT", playload: { name: e.target.name, value: e.target.value } })}
+                          />
                     </Box>
+                </Box>
+                <Box>
+                    <Button type='submit'>add Student</Button>
                 </Box>
             </form>
 
