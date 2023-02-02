@@ -65,6 +65,7 @@ const AddStudent = () => {
 
             {/* add student form */}
             <form onSubmit={handleSubmit}>
+                {/* student row info number one start */}
                 <Box sx={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -157,7 +158,7 @@ const AddStudent = () => {
                     </Box>
                 </Box>
 
-                {/*  info address two */}
+                {/* student row info number Two start */}
                 <Box sx={{
                     marginTop: '48px',
                     display: 'flex',
