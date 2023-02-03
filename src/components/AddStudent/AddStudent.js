@@ -81,6 +81,8 @@ const AddStudent = () => {
                             border: '1px solid #ddd',
                             // padding: '16.5px 14px',
                         }}
+
+                            required
                             type="text"
                             placeholder='FirstName'
                             name="firstName"
@@ -92,6 +94,7 @@ const AddStudent = () => {
                             // padding: '16.5px 14px',
 
                         }}
+                            required
                             type="text"
                             placeholder='Middle Name'
                             name="middleName"
@@ -102,6 +105,7 @@ const AddStudent = () => {
                             border: '1px solid #ddd',
                             // padding: '16.5px 14px',
                         }}
+                            required
                             type="text"
                             placeholder='LastName'
                             name="lastName"
@@ -115,6 +119,7 @@ const AddStudent = () => {
                     }}>
 
                         <AddStudentSelector 
+                            required
                             name="classes"
                             onChange={(e) => dispatch({ type: "INPUT", playload: { name: e.target.name, value: e.target.value } })}
                         >
@@ -134,7 +139,7 @@ const AddStudent = () => {
                         </AddStudentSelector>
 
                         <AddStudentSelector
-                            
+                            required
                             name="division"
                             onChange={(e) => dispatch({ type: "INPUT", playload: { name: e.target.name, value: e.target.value } })}
                         >
@@ -150,6 +155,7 @@ const AddStudent = () => {
                             width: '100%',
                             border: '1px solid #ddd'
                         }}
+                            required
                             type="number"
                             placeholder='Enter Roll Number in Digits'
                             name="rollNumber"
@@ -174,6 +180,7 @@ const AddStudent = () => {
                             width: '100%',
                             border: '1px solid #ddd'
                         }}
+                            required
                             type="text"
                             placeholder='Address Line 1'
                             name="addressLineOne"
@@ -183,6 +190,7 @@ const AddStudent = () => {
                             width: '100%',
                             border: '1px solid #ddd'
                         }}
+                            required
                             type="text"
                             placeholder='Address Line 2'
                             name="addressLineTwo"
@@ -198,6 +206,7 @@ const AddStudent = () => {
                             width: '100%',
                             border: '1px solid #ddd'
                         }}
+                            required
                             type="text"
                             placeholder='Landmark'
                             name="landmark"
@@ -207,6 +216,7 @@ const AddStudent = () => {
                             width: '100%',
                             border: '1px solid #ddd'
                         }}
+                            required
                             type="text"
                             placeholder='City'
                             name="city"
@@ -216,6 +226,7 @@ const AddStudent = () => {
                             width: '100%',
                             border: '1px solid #ddd'
                         }} 
+                            required
                         type="number"
                          placeholder='PinCode'
                             name="pincode"

@@ -9,27 +9,53 @@ import { AuthContext } from '../../context/AuthProvider';
 import { toast } from 'react-hot-toast';
 
 
-// const { logIn } = useContext(AuthContext)
-// console.log(logIn)
 
 
 const Login = () => {
-
-    const [userName, SetUserName] = useState("")
-    const [email, SetEmail] = useState("")
-    const [password, SetPassword] = useState("")
+    const { 
+        signInUser, 
+        user,
+        loading,
+        googleSignIn, 
+    } = useContext(AuthContext)
+    // console.log(logIn)
+    
+    const [userName, setUserName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [error, setError] = useState("")
 
 
     const handleSubmit = (event) =>{
         event.preventDefault();
         const form = event.target;
+        console.log(form)
         const data = {
             userName,
-            password
+            password,
+            email
         }
-        console.log(data)
-
+        // handlegoogle(email, password)
         
+        
+        
+    }
+
+
+    // google signin funciton
+    const handlegoogle = () => {
+        googleSignIn()
+            .then(result => {
+                setError(null)
+                const user = result.user;
+                console.log(user)
+                // form.reset()
+                toast("Successfully Login Good job", { duration: 3000 })
+            })
+            .catch(err => {
+                setError(err.message)
+                console.log(err)
+            })
     }
 
     return (
@@ -46,28 +72,20 @@ const Login = () => {
                     <TextField
                         required
                         id="outlined-required"
-                        label="Your Name"
-                        // defaultValue=""
-                        placeholder='Your Name'
-                        onChange={(e) => SetUserName(e.target.value)}
-                    />
-                    <TextField
-                        required
-                        id="outlined-required"
                         label="email"
                         type="email"
                         placeholder='Your Name'
-                        onChange={(e) => SetEmail(e.target.value)}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                     <TextField
                         id="outlined-password-input"
                         label="Password"
                         type="password"
                         autoComplete="current-password"
-                        onChange={(e) => SetPassword(e.target.value)}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                     <LOGINSOCAILICONS>
-                        <IconButton>
+                        <IconButton onClick={handlegoogle}>
                             <GoogleIcon />
                         </IconButton>
                         <IconButton>
