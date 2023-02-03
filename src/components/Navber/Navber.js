@@ -35,10 +35,10 @@ const Navber = () => {
                         <AlignHorizontalLeftOutlinedIcon/>
                         <Link to="/manageStudent">Manage Students</Link>
                     </LI>
-                    <LI>
+                    {!user &&<LI>
                         <LoginOutlinedIcon/>
                         <Link to="/login">Login</Link>
-                    </LI>
+                    </LI>}
                     {user && <LI onClick={logOut}>
                         <LoginOutlinedIcon />
                         <Link to="/register">Logout</Link>

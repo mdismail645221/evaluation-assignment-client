@@ -1,6 +1,7 @@
 import { Container } from '@mui/material';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import DrawerAppBar from '../components/AppBar/DrawerAppBar';
 import Navber from '../components/Navber/Navber';
 
 const Main = () => {
@@ -10,7 +11,8 @@ const Main = () => {
             background: '#FFFCFB'
         }}>
             <div>
-                <Navber></Navber>
+                <DrawerAppBar></DrawerAppBar>
+                {/* <Navber></Navber> */}
             </div>
             <div className='Outlet-container'>
                 <Outlet></Outlet>
