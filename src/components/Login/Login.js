@@ -29,13 +29,23 @@ const Login = () => {
     const handleSubmit = (event) =>{
         event.preventDefault();
         const form = event.target;
-        console.log(form)
-        const data = {
-            userName,
-            password,
-            email
-        }
-        // handlegoogle(email, password)
+        // console.log(form)
+        // const data = {
+        //     userName,
+        //     password,
+        //     email
+        // }
+        signInUser(email, password)
+        .then((result)=> {
+            setError(null)
+            const user = result.user;
+            console.log(user)
+            form.reset()
+        })
+        .catch((error)=>{
+            console.log(error)
+            setError(error.message)
+        })
         
         
         
