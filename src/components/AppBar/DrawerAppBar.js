@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -7,19 +7,30 @@ import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
+// import ListItem from '@mui/material/ListItem';
+// import ListItemButton from '@mui/material/ListItemButton';
+// import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 import { AppBarContainer } from '../../styled/AppBar';
+
+import { Link } from 'react-router-dom';
+import '../Navber/Navbar.css'
+import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined';
+// import { IconButton, styled } from '@mui/material';
+import { LI } from '../../styled/ManageStudent';
+import AlignHorizontalLeftOutlinedIcon from '@mui/icons-material/AlignHorizontalLeftOutlined';
+import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
+import { AuthContext } from '../../context/AuthProvider';
+
 
 const drawerWidth = 240;
 
 
 function DrawerAppBar(props) {
+    const {user, logOut} = useContext(AuthContext)
     const { window } = props;
     const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -33,17 +44,33 @@ function DrawerAppBar(props) {
                 MUI
             </Typography>
             <Divider />
-            <List>
+
                 {/* mobile navitems */}
 
-                <ul>
-                    <li>0111</li>
-                    <li>0111</li>
-                    <li>0111</li>
-                    <li>0111</li>
-                    <li>0111</li>
-                </ul>
-            </List>
+                <nav>
+                    <ul>
+                        <LI>
+                            <PeopleOutlinedIcon />
+                            <Link to="/addStudent">
+                                Add Student
+                            </Link>
+                        </LI>
+                        <LI>
+                            <AlignHorizontalLeftOutlinedIcon />
+                            <Link to="/manageStudent">Manage Students</Link>
+                        </LI>
+                        {!user && <LI>
+                            <LoginOutlinedIcon />
+                            <Link to="/login">Login</Link>
+                        </LI>}
+                        {user && <LI onClick={logOut}>
+                            <LoginOutlinedIcon />
+                            <Link to="/register">Logout</Link>
+                        </LI>}
+                    </ul>
+                </nav>
+
+                
         </Box>
     );
 

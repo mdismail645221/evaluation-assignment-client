@@ -8,6 +8,7 @@ import { LI } from '../../styled/ManageStudent';
 import AlignHorizontalLeftOutlinedIcon from '@mui/icons-material/AlignHorizontalLeftOutlined';
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import  { AuthContext } from '../../context/AuthProvider';
+import { styled } from '@mui/material';
 
 
 const Navber = () => {
@@ -17,8 +18,14 @@ const Navber = () => {
     // console.log(user.email)
 
 
+    const NavberContainer = styled('NavberContainer')(({theme})=>({
+        display: {sx: 'none'}
+    }))
+
     return (
-        <aside className='navbar-container'>
+        <NavberContainer sx={{
+            display: { xs: 'none', sm: 'none', lg: 'block' }
+        }} className='navbar-container'>
             {/* logo */}
             <div>
                 <Link to="/logo">LOGO</Link>
@@ -45,7 +52,7 @@ const Navber = () => {
                     </LI>}
                 </ul>
             </nav>
-        </aside>
+        </NavberContainer>
     );
 };
 
