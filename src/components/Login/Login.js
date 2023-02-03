@@ -69,7 +69,9 @@ const Login = () => {
     }
 
     return (
-        <LOGIN>
+        <LOGIN sx={{
+            marginTop: '4rem'
+        }}>
             <form onSubmit={handleSubmit}>
                 <Stack spacing={2} sx={{
                     background: '#FFFCFB',

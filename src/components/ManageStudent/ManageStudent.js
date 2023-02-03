@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import ModeOutlinedIcon from '@mui/icons-material/ModeOutlined';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+import { toast } from 'react-hot-toast';
 
 const ManageStudent = () => {
 
@@ -18,6 +19,25 @@ const ManageStudent = () => {
     }, [])
 
     console.log(students)
+
+
+
+
+
+    // specific student delete method 
+    const deleteStudent = (student) => {
+        console.log(student._id)
+        fetch(`http://localhost:5000/deleteStudent/${student._id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged > 0) {
+                    
+                }
+            })
+    }
+
 
 
     return (
@@ -56,18 +76,21 @@ const ManageStudent = () => {
                                 <TableCell >{`${student?.firstName} ${student?.middleName} ${student?.lastName}`}</TableCell>
                                 <TableCell>{student?.classes}</TableCell>
                                 <TableCell>{student?.rollNumber}</TableCell>
+                                {/* view button */}
                                 <TableCell>
                                     <IconButton sx={{ color: '#F4503E' }}>
                                         <RemoveRedEyeOutlinedIcon />
                                     </IconButton>
                                 </TableCell>
+                                {/* edit button ==> */}
                                 <TableCell>
                                     <IconButton sx={{ color: '#F4503E' }}>
                                         <ModeOutlinedIcon />
                                     </IconButton>
                                 </TableCell>
-                                <TableCell>
-                                    <IconButton sx={{ color: '#F4503E' }}>
+                                {/* delete button ==> */}
+                                <TableCell >
+                                    <IconButton onClick={() => deleteStudent(student)} sx={{ color: '#F4503E' }}>
                                         <DeleteForeverOutlinedIcon />
                                     </IconButton>
                                 </TableCell>
