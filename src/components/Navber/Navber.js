@@ -18,18 +18,15 @@ const Navber = () => {
     // console.log(user.email)
 
 
-    const NavberContainer = styled('NavberContainer')(({theme})=>({
+    const NAVBARCONTAINER = styled('div')(({theme})=>({
         display: {sx: 'none'}
     }))
 
     return (
-        <NavberContainer sx={{
-            display: { xs: 'none', sm: 'none', lg: 'block' }
+        <NAVBARCONTAINER sx={{
+            display: { xs: 'none', sm: 'block', lg: 'block' }
         }} className='navbar-container'>
-            {/* logo */}
-            <div>
-                <Link to="/logo">LOGO</Link>
-            </div>
+                     
             <nav>
                 <ul>
                     <LI>
@@ -52,7 +49,7 @@ const Navber = () => {
                     </LI>}
                 </ul>
             </nav>
-        </NavberContainer>
+        </NAVBARCONTAINER>
     );
 };
 

@@ -30,7 +30,9 @@ const drawerWidth = 240;
 
 
 function DrawerAppBar(props) {
-    const {user, logOut} = useContext(AuthContext)
+    // LOCAL STATE FOR LOGIN USER INFO
+    const { user, logOut } = useContext(AuthContext)
+
     const { window } = props;
     const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -41,7 +43,7 @@ function DrawerAppBar(props) {
     const drawer = (
         <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
             <Typography variant="h6" sx={{ my: 2 }}>
-                MUI
+                LOGO
             </Typography>
             <Divider />
 
@@ -76,6 +78,9 @@ function DrawerAppBar(props) {
 
     const container = window !== undefined ? () => window().document.body : undefined;
 
+
+
+
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline  />
@@ -95,10 +100,15 @@ function DrawerAppBar(props) {
                         component="div"
                         sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                     >
-                        MUI
+                        LOGO
                     </Typography>
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-                        {/* navitems */}
+                            {user && <>
+                            <Typography>
+                                {user.email}
+                            </Typography>
+                            </>}
+                        
                     </Box>
                 </Toolbar>
             </AppBarContainer>
