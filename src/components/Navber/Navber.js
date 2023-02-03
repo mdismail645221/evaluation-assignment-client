@@ -30,7 +30,7 @@ const Navber = () => {
                     </LI>
                     <LI>
                         <LoginOutlinedIcon/>
-                        <Link to="/">Login</Link>
+                        <Link to="/login">Login</Link>
                     </LI>
                     <LI>
                         <LoginOutlinedIcon/>

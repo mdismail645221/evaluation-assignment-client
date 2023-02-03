@@ -1,96 +1,94 @@
 import React, { createContext, useEffect, useState } from 'react';
 import app from '../firebase/firebase.config';
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth'
-import toast from 'react-hot-toast';
+import {
+    createUserWithEmailAndPassword,
+    getAuth,
+    GoogleAuthProvider,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    signOut,
+    updateProfile
+} from 'firebase/auth'
 
-export const AuthContext = createContext();
 const auth = getAuth(app);
+export const AuthContext = createContext()
 
 const AuthProvider = ({ children }) => {
-
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // create User sing in --->
-    const createUser = (email, password) => {
+
+
+
+    // create user in the  Register Form
+    const registerUser = (email, password) => {
         setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
-
     }
 
 
+    // update USER NAME & image 
+    const updateUser = (userInfo) => {
+        setLoading(true)
+        return updateProfile(auth.currentUser, userInfo);
+    }
 
-    // lon in in user 
-    const logIn = (email, password) => {
+
+    // User signIn 
+    const signInUser = (email, password) => {
         setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
 
-    // updateUserProfile 
-    const updateUserProfile = (profile) => {
-        return updateProfile(auth.currentUser, profile)
+
+    // signGoogle
+    const provider = new GoogleAuthProvider();
+    const googleSignIn = () => {
+        setLoading(true);
+        return signInWithPopup(auth, provider)
     }
 
 
-    // logOut 
-    const lotOut = () => {
+
+    // sign out user
+    const logOut = () => {
         setLoading(true)
-        toast.success('Successfully Log Out. [Good Job]')
+        // localStorage.removeItem('evaluation_token')
         return signOut(auth)
     }
 
 
-    // google sing in 
-    const googleSingIn = (provider) => {
-        setLoading(true)
-        return signInWithPopup(auth, provider)
-    }
-    // signInWithRedirect(auth, provider); --->
 
 
 
-    const githubSingIn = (gitProvider) => {
-        setLoading(true)
-        return signInWithPopup(auth, gitProvider)
-    }
-
-
-
-    // onAuthStateChanged [useffect modde use korte hobe----->]
 
     useEffect(() => {
-        const unSubcribed = onAuthStateChanged(auth, currentUser => {
-            console.log('OnAuthstateChanged uffect:', currentUser)
+        const unSubscribed = onAuthStateChanged(auth, (currentUser) => {
+            console.log('onAuthStateChanged current User', currentUser);
+            // if()
             setUser(currentUser)
             setLoading(false)
+
         })
+
         return () => {
-            unSubcribed()
+            unSubscribed()
         }
-    }, []);
 
-
-   
-
-
+    }, [])
 
 
 
     const authInfo = {
         user,
-        createUser,
-        updateUserProfile,
-        lotOut,
-        logIn,
-        googleSingIn,
-        githubSingIn,
-        theme,
-        toggleTheme
+        loading,
+        registerUser,
+        updateUser,
+        signInUser,
+        googleSignIn,
+        logOut
     }
-
-
-
-
 
     return (
         <AuthContext.Provider value={authInfo}>
