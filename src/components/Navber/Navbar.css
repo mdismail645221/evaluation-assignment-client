@@ -2,8 +2,10 @@
     background-color: #eee;
     height: 100vh;
     min-width: 250px;
-    overflow: visible;
+    overflow: hidden;
     padding: 10px 40px;
+    margin-top: 4rem;
+    position: fixed;
 }
 
 .navbar-container ul{

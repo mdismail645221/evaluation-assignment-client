@@ -12,7 +12,9 @@ const Main = () => {
         }}>
             <div>
                 <DrawerAppBar></DrawerAppBar>
-                {/* <Navber></Navber> */}
+            </div>
+            <div>
+                <Navber></Navber>
             </div>
             <div className='Outlet-container'>
                 <Outlet></Outlet>
