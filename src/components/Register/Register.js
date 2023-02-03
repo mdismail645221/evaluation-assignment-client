@@ -6,7 +6,8 @@ import { LOGIN, LOGINSOCAILICONS, LOGINTITLE } from '../../styled/Login';
 import GoogleIcon from '@mui/icons-material/Google';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { AuthContext } from '../../context/AuthProvider';
-import { toast } from 'react-hot-toast';
+// import { toast } from 'react-hot-toast';
+import { UploadImgBB } from '../../hooks/UploadImgbb';
 
 
 
@@ -16,6 +17,7 @@ const Register = () => {
         registerUser,
         loading,
         googleSignIn,
+        updateUser
     } = useContext(AuthContext)
     // console.log(logIn)
 
@@ -23,27 +25,52 @@ const Register = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
+    const [imgUrl, setImgUrl] = useState("")
 
 
-    const handleSubmit = (event) => {
+    const handleRegister = (event) => {
         event.preventDefault();
         const form = event.target;
-        console.log(form)
+        const imageFile = (imgUrl[0])
         const data = {
             userName,
             password,
-            email
+            email, 
+            imgUrl
         }
-        // handlegoogle(email, password)
         registerUser(email, password)
         .then((result) => {
             setError(null)
             const user = result.user;
-            console.log(user)
-            toast.success('Successfully Registed. Good Job', { duration: 3000 })
+            UploadImgBB(imageFile)
+            .then((imgData => {
+                const userInfo = {
+                    displayName: userName,
+                    photoURL: imgData.data.display_url
+                }
+                updateUser(userInfo)
+                .then(result => {
+                    setError(null)
+                    // toast.success('Successfully Registed. Good Job', { duration: 3000 })
+                    form.reset()
+                })
+                .catch((error)=>{
+                    setError(error.message)
+                    // toast.error(`${error.message}`, { duration: 3000 })
+
+                })
+                // console.log(userInfo)
+            }))
+                .catch(err => {
+                    console.log(err)
+                    // toast.error(err.message)
+                    setError(err.message)
+                });
+            
         })
         .catch(error=> {
             setError(error.message)
+            // toast.error(error.message)
             console.log(error)
         })
 
@@ -58,8 +85,7 @@ const Register = () => {
                 setError(null)
                 const user = result.user;
                 console.log(user)
-                // form.reset()
-                toast("Successfully Login Good job", { duration: 3000 })
+                // toast("Successfully Login Good job", { duration: 3000 })
             })
             .catch(err => {
                 setError(err.message)
@@ -69,7 +95,7 @@ const Register = () => {
 
     return (
         <LOGIN>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleRegister}>
                 <Stack spacing={2} sx={{
                     background: '#FFFCFB',
                     padding: '10px',
@@ -89,6 +115,15 @@ const Register = () => {
                     />
                     <TextField
                         required
+                        // id="outlined-required"
+                        // label="Your Name"
+                        // defaultValue=""
+                        type='file'
+                        // placeholder='Your Name'
+                        onChange={(e) => setImgUrl(e.target.files)}
+                    />
+                    <TextField
+                        required
                         id="outlined-required"
                         label="email"
                         type="email"
@@ -102,6 +137,14 @@ const Register = () => {
                         autoComplete="current-password"
                         onChange={(e) => setPassword(e.target.value)}
                     />
+                   { 
+                    !error && <Stack>
+                        <p>You have already create account? <Link to="/login">Login</Link></p>
+                    </Stack>
+                    }
+                    {error && <Stack>
+                        <p>{error}</p>
+                    </Stack>}
                     <LOGINSOCAILICONS>
                         <IconButton onClick={handlegoogle}>
                             <GoogleIcon />

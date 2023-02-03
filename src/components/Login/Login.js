@@ -1,4 +1,4 @@
-import { Button, IconButton, Stack, TextField } from '@mui/material';
+import { Button, IconButton, Paper, Stack, TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -84,6 +84,9 @@ const Login = () => {
                         autoComplete="current-password"
                         onChange={(e) => setPassword(e.target.value)}
                     />
+                    <Stack>
+                        <p>Don't have a account? <Link to="/register">Create account</Link></p>
+                    </Stack>
                     <LOGINSOCAILICONS>
                         <IconButton onClick={handlegoogle}>
                             <GoogleIcon />
